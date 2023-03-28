@@ -14,10 +14,10 @@
   <!-- Styles -->
 </head>
 
-<body>
+<body class="bg-stone-100">
   <main id="app"></main>
 
-  @vite(['resources/js/app.js'])
+  @vite(['resources/js/app.ts'])
 </body>
 
 </html>
