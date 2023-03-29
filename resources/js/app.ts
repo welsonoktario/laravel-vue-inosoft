@@ -1,8 +1,6 @@
-import "../css/app.css";
-import "./bootstrap";
-import { store } from "./store";
+import '../css/app.css'
+import App from './App.vue'
+import store from './store'
+import { createApp } from 'vue'
 
-import App from "./App.vue";
-import { createApp } from "vue";
-
-createApp(App).use(store).mount("#app");
+createApp(App).use(store).mount('#app')

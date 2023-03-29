@@ -1,23 +1,41 @@
 <script setup lang="ts">
-export interface AtomSelectType {
+import { computed, useSlots } from 'vue'
+
+export interface AtomSelectProps {
   selected?: string | number
   options?: Array<{ value: string | number; label: string }>
 }
 
-withDefaults(defineProps<AtomSelectType>(), {
+withDefaults(defineProps<AtomSelectProps>(), {
   selected: 'null',
   options: () => []
 })
 
 defineEmits(['selectChange'])
+
+const slots = useSlots()
+
+const classObject = computed(() => {
+  return {
+    'pl-12 pr-8': slots.default,
+    'pl-3 pr-8': !slots.default
+  }
+})
 </script>
 
 <template>
   <!-- Start AtomSelect -->
-  <div class="relative w-fit rounded border border-stone-200 bg-stone-100 text-stone-700">
+  <div
+    class="relative inline-block w-full rounded border border-stone-200 bg-stone-100 text-stone-700"
+  >
+    <template v-if="slots.default">
+      <slot></slot>
+    </template>
+
     <select
       :value="selected"
-      class="z-10 w-full appearance-none bg-transparent py-2 pl-3 pr-8"
+      class="z-10 w-full appearance-none bg-transparent py-2"
+      :class="classObject"
       @change="$emit('selectChange', $event.target)"
     >
       <option value="null" selected disabled>Select</option>

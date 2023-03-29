@@ -1,30 +1,26 @@
 <script setup lang="ts">
-defineProps({
-  type: {
-    type: String,
-    default: 'text',
-    required: false
-  },
-  placeholder: {
-    type: String,
-    default: '',
-    required: false
-  },
-  value: {
-    type: [String, Number],
-    default: '',
-    required: false
-  }
+export interface AtomInputProps {
+  type?: string
+  placeholder?: string
+  value?: string | number
+  block?: boolean
+}
+
+withDefaults(defineProps<AtomInputProps>(), {
+  type: 'text',
+  placeholder: '',
+  value: '',
+  block: false
 })
 </script>
 
 <template>
   <!-- Start AtomInput -->
   <input
-    class="rounded border border-stone-200 bg-stone-100 py-2 px-3 text-stone-700 placeholder:text-stone-400"
+    class="rounded inline-block border border-stone-200 bg-stone-100 py-2 px-3 text-stone-700 placeholder:text-stone-400"
     :class="{
-      'w-24': type === 'number',
-      'w-28': type === 'text'
+      'w-full': block,
+      'w-28': !block
     }"
     :type="type"
     :value="value"
